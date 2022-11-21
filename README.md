@@ -1,5 +1,5 @@
 Task 2 
---
+---
 HTTP API через которое можно получить:  
 * список всех продуктов с их категориями,  
 * список категорий с продуктами,  
@@ -25,3 +25,14 @@ Now in the browser you can see the result of the program at:
 http://127.0.0.1:8888/get_products  
 http://127.0.0.1:8888/get_categories  
 http://127.0.0.1:8888/get_pairs  
+
+
+###DB schema  
+<p align="center">
+<img src="preview/photo1.png" width="420">
+</p>  
+
+###Request example 
+<p align="center">
+<img src="preview/photo2.png" width="420">
+</p>>
