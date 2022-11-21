@@ -36,7 +36,7 @@ def get_products():
                 f"left join categories c on ut.category_id = c.category_id) group by product_name;")
     res = cur.fetchall()
     dict_res = {"products": [{i[0]:i[1] if i[1] is None else [j for j in i[1].split(",")]} for i in res]}
-    return json.dumps(dict_res,ensure_ascii=False,)
+    return json.dumps(dict_res, ensure_ascii=False)
 
 
 # получить список категорий с продуктами
@@ -47,7 +47,7 @@ def get_categories():
                 f"left join products p on p.product_id = ut.product_id group by category_name;")
     res = cur.fetchall()
     dict_res = {"categories": [{i[0]:i[1] if i[1] is None else [j for j in i[1].split(",")]} for i in res]}
-    return json.dumps(dict_res,ensure_ascii=False,)
+    return json.dumps(dict_res, ensure_ascii=False)
 
 
 # получить список всех пар «Имя продукта – Имя категории»
@@ -67,7 +67,7 @@ def get_pairs():
                 f"left join union_table on union_table.category_id = categories.category_id "
                 f"where union_table.category_id is null;")
     dict_res["categories_without_products"] = [i[0] for i in cur.fetchall()]
-    return json.dumps(dict_res,ensure_ascii=False,)
+    return json.dumps(dict_res, ensure_ascii=False)
 
 
 if __name__ == "__main__":
