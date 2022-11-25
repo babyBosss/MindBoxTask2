@@ -27,12 +27,14 @@ http://127.0.0.1:8888/get_categories
 http://127.0.0.1:8888/get_pairs  
 
 
-###DB schema  
+### Database 
+
 <p align="center">
-<img src="preview/photo1.png" width="420">
+<img src="preview/photo1.png" width="400">
 </p>  
 
-###Request example 
+### Request example 
+
 <p align="center">
-<img src="preview/photo2.png" width="420">
-</p>>
+<img src="preview/photo2.png" width="600">
+</p>
