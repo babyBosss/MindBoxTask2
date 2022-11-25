@@ -24,7 +24,13 @@ with open(os.path.join(script_dir, 'fill_db.sql'), 'r') as file:
 
 @app.route('/', methods=["GET"])
 def default_page():
-    return json.dumps({"available requests": ["get_products", "get_categories", "get_pairs"]})
+    data = {"available requests": ["get_products", "get_categories", "get_pairs"]}
+    response = app.response_class(
+        response=json.dumps(data),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 
 # получить список всех продуктов с их категориями
@@ -36,7 +42,12 @@ def get_products():
                 f"left join categories c on ut.category_id = c.category_id) group by product_name;")
     res = cur.fetchall()
     dict_res = {"products": [{i[0]:i[1] if i[1] is None else [j for j in i[1].split(",")]} for i in res]}
-    return json.dumps(dict_res, ensure_ascii=False)
+    response = app.response_class(
+        response=json.dumps(dict_res),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 
 # получить список категорий с продуктами
@@ -47,8 +58,12 @@ def get_categories():
                 f"left join products p on p.product_id = ut.product_id group by category_name;")
     res = cur.fetchall()
     dict_res = {"categories": [{i[0]:i[1] if i[1] is None else [j for j in i[1].split(",")]} for i in res]}
-    return json.dumps(dict_res, ensure_ascii=False)
-
+    response = app.response_class(
+        response=json.dumps(dict_res),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 # получить список всех пар «Имя продукта – Имя категории»
 # возвращает список пар, а так же список продуктов без категории и список категорий без продуктов
@@ -67,8 +82,12 @@ def get_pairs():
                 f"left join union_table on union_table.category_id = categories.category_id "
                 f"where union_table.category_id is null;")
     dict_res["categories_without_products"] = [i[0] for i in cur.fetchall()]
-    return json.dumps(dict_res, ensure_ascii=False)
-
+    response = app.response_class(
+        response=json.dumps(dict_res),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
